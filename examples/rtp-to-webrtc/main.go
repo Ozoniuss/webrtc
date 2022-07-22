@@ -74,12 +74,12 @@ func main() {
 	// Wait for the offer to be pasted
 	offer := webrtc.SessionDescription{}
 	fmt.Println(os.Getwd())
-	signal.MustReadStdin()
-	offerBytes, err := os.ReadFile("./examples/rtp-to-webrtc/offer.txt")
-	if err != nil {
-		panic(err)
-	}
-	signal.Decode(string(offerBytes), &offer)
+	// signal.MustReadStdin()
+	// offerBytes, err := os.ReadFile("./examples/rtp-to-webrtc/offer.txt")
+	// if err != nil {
+	// 	panic(err)
+	// }
+	signal.Decode(signal.MustReadStdin(), &offer)
 
 	// Set the remote SessionDescription
 	if err = peerConnection.SetRemoteDescription(offer); err != nil {
