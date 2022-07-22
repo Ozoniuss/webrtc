@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"net"
+	"os"
 
 	"github.com/pion/webrtc/v3"
 	"github.com/pion/webrtc/v3/examples/internal/signal"
@@ -72,7 +73,13 @@ func main() {
 
 	// Wait for the offer to be pasted
 	offer := webrtc.SessionDescription{}
-	signal.Decode(signal.MustReadStdin(), &offer)
+	fmt.Println(os.Getwd())
+	signal.MustReadStdin()
+	offerBytes, err := os.ReadFile("./examples/rtp-to-webrtc/offer.txt")
+	if err != nil {
+		panic(err)
+	}
+	signal.Decode(string(offerBytes), &offer)
 
 	// Set the remote SessionDescription
 	if err = peerConnection.SetRemoteDescription(offer); err != nil {
