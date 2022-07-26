@@ -11,6 +11,8 @@ COPY . /webrtc
 
 WORKDIR /webrtc
 
+RUN go mod download
+
 RUN go build -o /app/build/rtp-to-webrtc examples/rtp-to-webrtc/main.go
 
 ENTRYPOINT ["/app/build/rtp-to-webrtc"]
