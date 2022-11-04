@@ -18,7 +18,7 @@ or
 ```
 docker compose -f webrtc/docker-compose.yml up --build -d
 ```
-5. Copt the answer from `/sdps/answer.txt` and paste it to the browser.
+5. Copt the answer from `/sdps/answer.txt` and paste it to the browser. Alternatively, the answer is printed to the container's standard output, so you can copy it from the container's logs as well (which is probably easier).
 
 6. Stream video: 
 ```
