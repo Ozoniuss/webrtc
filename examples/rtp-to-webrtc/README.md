@@ -7,6 +7,7 @@
 5. Copt the answer from `/sdps/answer.txt` and paste it to the browser.
 6. Stream video: `bash stream.sh tomjerry.webm`
 
+ICE servers can be updated both in the `main.go` file and the browser javascript code.
 
 
 -----

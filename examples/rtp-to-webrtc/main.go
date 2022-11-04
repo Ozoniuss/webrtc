@@ -17,14 +17,16 @@ import (
 var OFFER_PATH = "/sdps/offer.txt"
 var ANSWER_PATH = "/sdps/answer.txt"
 
+var iceServers []webrtc.ICEServer = []webrtc.ICEServer{
+	{
+		URLs: []string{"stun:stun.l.google.com:19302"},
+	},
+}
+
 func main() {
 
 	peerConnection, err := webrtc.NewPeerConnection(webrtc.Configuration{
-		ICEServers: []webrtc.ICEServer{
-			{
-				URLs: []string{"stun:stun.l.google.com:19302"},
-			},
-		},
+		ICEServers: iceServers,
 	})
 	if err != nil {
 		panic(err)
