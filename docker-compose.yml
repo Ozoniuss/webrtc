@@ -12,5 +12,6 @@ services:
     stdin_open: true
     tty: true
 
+    # Mount point for offer and answers.
     volumes:
-      - ./examples/rtp-to-webrtc/sdps:/home/bms/webrtc-go-alex/sdps
+      - /home/bms/webrtc-go-alex/sdps:/sdps
