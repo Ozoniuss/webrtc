@@ -14,8 +14,8 @@ import (
 	"github.com/pion/webrtc/v3/examples/internal/signal"
 )
 
-var OFFER_PATH = "/sdps/offer.txt"
-var ANSWER_PATH = "/sdps/answer.txt"
+var OFFER_PATH = "home/bms/webrtc-go-alex/sdps/offer.txt"
+var ANSWER_PATH = "home/bms/webrtc-go-alex/sdps/answer.txt"
 
 var iceServers []webrtc.ICEServer = []webrtc.ICEServer{
 	{

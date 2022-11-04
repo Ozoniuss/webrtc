@@ -10,13 +10,13 @@ cd /home/bms/web-go-alex
 
 3. Copy the SDP (offer) from the browser to `/sdps/offer.txt`
 
-4. Run the go code inside a docker container: 
+4. Run the go code: 
 ```
-docker compose -f webrtc/docker-compose.yml up -d
+go build webrtc/examples/rtp-to-webrtc/main.go && ./webrtc/examples/rtp-to-webrtc/main.exe
 ```
 or 
 ```
-docker compose -f webrtc/docker-compose.yml up --build -d
+./webrtc/examples/rtp-to-webrtc/main.exe
 ```
 5. Copt the answer from `/sdps/answer.txt` and paste it to the browser. Alternatively, the answer is printed to the container's standard output, so you can copy it from the container's logs as well (which is probably easier).
 
