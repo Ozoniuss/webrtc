@@ -7,14 +7,18 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net"
-	"os"
 
 	"github.com/pion/webrtc/v3"
 	"github.com/pion/webrtc/v3/examples/internal/signal"
 )
 
+var OFFER_PATH = "/sdps/offer.txt"
+var ANSWER_PATH = "/sdps/answer.txt"
+
 func main() {
+
 	peerConnection, err := webrtc.NewPeerConnection(webrtc.Configuration{
 		ICEServers: []webrtc.ICEServer{
 			{
@@ -71,15 +75,16 @@ func main() {
 		}
 	})
 
-	// Wait for the offer to be pasted
+	// Read the offer from the offer.txt file.
 	offer := webrtc.SessionDescription{}
-	fmt.Println(os.Getwd())
-	// signal.MustReadStdin()
-	// offerBytes, err := os.ReadFile("./examples/rtp-to-webrtc/offer.txt")
-	// if err != nil {
-	// 	panic(err)
-	// }
-	signal.Decode(signal.MustReadStdin(), &offer)
+
+	offerBytes, err := ioutil.ReadFile(OFFER_PATH)
+	if err != nil {
+		fmt.Println("[error] could not read offer")
+		panic(err)
+	}
+
+	signal.Decode(string(offerBytes), &offer)
 
 	// Set the remote SessionDescription
 	if err = peerConnection.SetRemoteDescription(offer); err != nil {
@@ -105,15 +110,23 @@ func main() {
 	// in a production application you should exchange ICE Candidates via OnICECandidate
 	<-gatherComplete
 
+	answerSDP := signal.Encode(*peerConnection.LocalDescription())
+
 	// Output the answer in base64 so we can paste it in browser
 	fmt.Println(signal.Encode(*peerConnection.LocalDescription()))
+
+	err = ioutil.WriteFile(ANSWER_PATH, []byte(answerSDP), 0644)
+	if err != nil {
+		fmt.Println("[error] could not log answer")
+		panic(err)
+	}
 
 	// Read RTP packets forever and send them to the WebRTC Client
 	inboundRTPPacket := make([]byte, 1600) // UDP MTU
 	for {
 		n, _, err := listener.ReadFrom(inboundRTPPacket)
 		if err != nil {
-			panic(fmt.Sprintf("error during read: %s", err))
+			panic(fmt.Sprintf("[error] error during read: %s", err))
 		}
 
 		if _, err = videoTrack.Write(inboundRTPPacket[:n]); err != nil {
