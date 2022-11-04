@@ -1,3 +1,17 @@
+# Steps to run on remote
+
+1. Go to `/home/bms/web-go-alex` as the working directory.
+2. Access [jsfiddle.net](https://jsfiddle.net/z7ms3u5r/)
+3. Copy the SDP (offer) inside `/sdps/offer.txt`
+4. Run the code inside a docker container: `docker compose -f webrtc/docker-compose.yml up` or `docker compose -f webrtc/docker-compose.yml up --build`
+5. Copt the answer from `/sdps/answer.txt` and paste it to the browser.
+6. Stream video: `bash stream.sh tomjerry.webm`
+
+
+
+-----
+Original documentation
+
 # rtp-to-webrtc
 rtp-to-webrtc demonstrates how to consume a RTP stream video UDP, and then send to a WebRTC client.
 
