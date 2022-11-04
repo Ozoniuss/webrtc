@@ -12,11 +12,11 @@ cd /home/bms/web-go-alex
 
 4. Run the go code: 
 ```
-go build webrtc/examples/rtp-to-webrtc/main.go && ./webrtc/examples/rtp-to-webrtc/main.exe
+cd webrtc && go build  -o /home/bms/webrtc-go-alex ./examples/rtp-to-webrtc/main.go && cd .. && ./main
 ```
 or 
 ```
-./webrtc/examples/rtp-to-webrtc/main.exe
+./main
 ```
 5. Copt the answer from `/sdps/answer.txt` and paste it to the browser. Alternatively, the answer is printed to the container's standard output, so you can copy it from the container's logs as well (which is probably easier).
 
