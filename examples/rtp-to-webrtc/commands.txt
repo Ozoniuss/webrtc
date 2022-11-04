@@ -1,5 +1,0 @@
-actually stream: ffmpeg -re -i tomjerry.webm -vcodec libvpx -f rtp -an 'rtp://127.0.0.1:5004?pkt_size=1200'
-
-find codec: ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 .\Tom_And_Jerry_-_Jerrys_Cousin_Part_1-590331.mp4
-
-convert to vp8: ffmpeg -i .\Tom_And_Jerry_-_Jerrys_Cousin_Part_1-590331.mp4 -c:v libvpx -c:a libvorbis tomjerry.webm 
