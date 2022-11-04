@@ -2,13 +2,15 @@ version: '3.9'
 
 services:
   app:
-    build: 
+    build:
       context: "."
       dockerfile: "./Dockerfile"
-    container_name: "rtp-webrtc"
+    container_name: "rtp-webrtc-golang"
     ports:
       - 5004:5004
     network_mode: "host"
     stdin_open: true
     tty: true
 
+    volumes:
+      - ./examples/rtp-to-webrtc/sdps:/sdps
