@@ -1,11 +1,29 @@
 # Steps to run on remote
 
 1. Go to `/home/bms/web-go-alex` as the working directory.
+
+```
+cd /home/bms/web-go-alex
+```
+
 2. Access [jsfiddle.net](https://jsfiddle.net/z7ms3u5r/)
-3. Copy the SDP (offer) inside `/sdps/offer.txt`
-4. Run the code inside a docker container: `docker compose -f webrtc/docker-compose.yml up` or `docker compose -f webrtc/docker-compose.yml up --build`
+
+3. Copy the SDP (offer) from the browser to `/sdps/offer.txt`
+
+4. Run the go code inside a docker container: 
+```
+docker compose -f webrtc/docker-compose.yml up -d
+```
+or 
+```
+docker compose -f webrtc/docker-compose.yml up --build -d
+```
 5. Copt the answer from `/sdps/answer.txt` and paste it to the browser.
-6. Stream video: `bash stream.sh tomjerry.webm`
+
+6. Stream video: 
+```
+bash stream.sh tomjerry.webm
+````
 
 ICE servers can be updated both in the `main.go` file and the browser javascript code.
 
